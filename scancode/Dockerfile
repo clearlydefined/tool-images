@@ -12,7 +12,7 @@ FROM python:2.7
 ENV SCANCODE_OPTIONS "--copyright --license --info --diag --only-findings --strip-root --quiet --timeout 300 -n 3 -f json-pp"
 ENV SCANCODE_HOME /opt/scancode-toolkit-2.2.1
 ENV SCANCODE_OUTPUT_PATH /output
-ENV SCANCODE_OUTPUT_FILENAME scancode-2.2.1.json
+ENV SCANCODE_OUTPUT_FILENAME scancode.json
 
 RUN curl -sL https://github.com/nexB/scancode-toolkit/releases/download/v2.2.1/scancode-toolkit-2.2.1.tar.bz2 | tar -C /opt -jx \
 && ${SCANCODE_HOME}/scancode --version
