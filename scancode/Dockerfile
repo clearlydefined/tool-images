@@ -9,7 +9,7 @@
 
 FROM python:2.7
 
-ENV SCANCODE_OPTIONS "--copyright --license --info --package --license-diag --only-findings --strip-root --quiet --timeout 1000 -n 2"
+ENV SCANCODE_OPTIONS "--copyright --license --info --package --license-diag --only-findings --strip-root --quiet --timeout 1000 -n 3"
 ENV SCANCODE_HOME /opt/scancode-toolkit-2.9.0b1
 ENV SCANCODE_OUTPUT_PATH /output
 ENV SCANCODE_OUTPUT_FILENAME scancode.json
