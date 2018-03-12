@@ -9,16 +9,16 @@
 
 FROM python:2.7
 
-ENV SCANCODE_OPTIONS "--copyright --license --info --diag --only-findings --strip-root --quiet --timeout 300 -n 3 -f json-pp"
-ENV SCANCODE_HOME /opt/scancode-toolkit-2.2.1
+ENV SCANCODE_OPTIONS "--copyright --license --info --package --license-diag --only-findings --strip-root --quiet --timeout 1000 -n 3"
+ENV SCANCODE_HOME /opt/scancode-toolkit-2.9.0b1
 ENV SCANCODE_OUTPUT_PATH /output
 ENV SCANCODE_OUTPUT_FILENAME scancode.json
 
-RUN curl -sL https://github.com/nexB/scancode-toolkit/releases/download/v2.2.1/scancode-toolkit-2.2.1.tar.bz2 | tar -C /opt -jx \
+RUN curl -sL https://github.com/nexB/scancode-toolkit/releases/download/v2.9.0b1/scancode-toolkit-2.9.0b1.tar.bz2 | tar -C /opt -jx \
 && ${SCANCODE_HOME}/scancode --version
 
 RUN mkdir /repo ${SCANCODE_OUTPUT_PATH}
 WORKDIR /repo
 
 ENTRYPOINT git clone ${SOURCE_URL} --quiet && cd */ && git reset --hard ${SOURCE_COMMIT} --quiet \
-  && ${SCANCODE_HOME}/scancode ${SCANCODE_OPTIONS} ./ ${SCANCODE_OUTPUT_PATH}/${SCANCODE_OUTPUT_FILENAME} && cat ${SCANCODE_OUTPUT_PATH}/${SCANCODE_OUTPUT_FILENAME}
+  && ${SCANCODE_HOME}/scancode ${SCANCODE_OPTIONS} --json-pp ${SCANCODE_OUTPUT_PATH}/${SCANCODE_OUTPUT_FILENAME} ./ && cat ${SCANCODE_OUTPUT_PATH}/${SCANCODE_OUTPUT_FILENAME}
